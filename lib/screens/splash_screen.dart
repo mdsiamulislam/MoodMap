@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:moodmap/const/color.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: primaryBGColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AnimatedContainer(
-              duration: Duration(seconds: 2),
-              child: Image.asset('assets/logo.png', height: 120),
-            ),
+            Image.asset('assets/logo/logo.jpeg', height: 250),
             SizedBox(height: 20),
             Text(
               "Your daily guide to emotional well-being",
-              style: TextStyle(fontSize: 18, fontFamily: 'Nunito'),
+              style: TextStyle(fontSize: 18, fontFamily: 'Nunito',color: Colors.white),
             ),
             SizedBox(height: 50),
             ElevatedButton(
