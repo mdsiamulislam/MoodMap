@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
             SizedBox(height: 20),
             Text(
               "Your daily guide to emotional well-being",
-              style: TextStyle(fontSize: 18, fontFamily: 'Nunito',color: Colors.white),
+              style: TextStyle(fontSize: 18, fontFamily: 'Nunito'),
             ),
             SizedBox(height: 50),
             ElevatedButton(

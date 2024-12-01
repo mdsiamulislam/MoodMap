@@ -10,32 +10,19 @@ class StatisticsHomePage extends StatefulWidget {
 
 class _StatisticsHomePageState extends State<StatisticsHomePage> {
   int currentPageIndex = 1;
-  double moodRating = 5.0;  // Default rating (out of 10)
-  TextEditingController _noteController = TextEditingController();
-  List<String> savedStatistics = [];
+  List<String> groupedMoodLogs = [];
 
   @override
   void initState() {
     super.initState();
-    _loadStatistics();
+    _loadMoodLogs();
   }
 
-  // Load previous evaluations from SharedPreferences
-  _loadStatistics() async {
+  // Load grouped mood logs saved by MoodSug class
+  Future<void> _loadMoodLogs() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      savedStatistics = prefs.getStringList('savedStatistics') ?? [];
-    });
-  }
-
-  // Save the current evaluation to SharedPreferences
-  _saveStatistics() async {
-    final prefs = await SharedPreferences.getInstance();
-    String entry = 'Mood Rating: ${moodRating.toStringAsFixed(1)}, Note: ${_noteController.text}';
-    savedStatistics.insert(0, entry);  // Insert at the top
-    await prefs.setStringList('savedStatistics', savedStatistics);
-    setState(() {
-      _noteController.clear(); // Clear the note after saving
+      groupedMoodLogs = prefs.getStringList('groupedMoodLogs') ?? [];
     });
   }
 
@@ -43,7 +30,8 @@ class _StatisticsHomePageState extends State<StatisticsHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Statistics'),
+        title: const Text('Mood Statistics'),
+        backgroundColor: Colors.green,
       ),
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
@@ -88,69 +76,41 @@ class _StatisticsHomePageState extends State<StatisticsHomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Title
-            Text(
-              'Evaluate Your Mood/Statistics',
+            const Text(
+              'Mood Logs & Statistics',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-            // Mood Slider to evaluate mood (0 to 10)
-            Text('Mood Rating (0 - 10)', style: TextStyle(fontSize: 18)),
-            Slider(
-              value: moodRating,
-              min: 0,
-              max: 10,
-              divisions: 10,
-              label: moodRating.toStringAsFixed(1),
-              onChanged: (double value) {
-                setState(() {
-                  moodRating = value;
-                });
-              },
-            ),
-            SizedBox(height: 20),
-
-            // Note input to add a message
-            Text('Add a note', style: TextStyle(fontSize: 18)),
-            TextField(
-              controller: _noteController,
-              maxLines: 4,
-              decoration: InputDecoration(
-                hintText: 'Any thoughts or notes about today?',
-                border: OutlineInputBorder(),
-                contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              ),
-            ),
-            SizedBox(height: 20),
-
-            // Save Button
-            ElevatedButton(
-              onPressed: _saveStatistics,
-              child: Text('Save Evaluation'),
-            ),
-            SizedBox(height: 20),
-
-            // Display Saved Statistics
-            Text(
-              'Previous Evaluations:',
+            // Display grouped mood logs
+            const Text(
+              'Your Mood Check Logs:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
+            const SizedBox(height: 10),
+
             Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: savedStatistics.map((entry) {
-                    return Card(
-                      margin: EdgeInsets.symmetric(vertical: 8),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          entry,
-                          style: TextStyle(fontSize: 16),
-                        ),
+              child: groupedMoodLogs.isNotEmpty
+                  ? ListView.builder(
+                itemCount: groupedMoodLogs.length,
+                itemBuilder: (context, index) {
+                  final moodLog = groupedMoodLogs[index];
+                  return Card(
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(
+                        moodLog,
+                        style: const TextStyle(fontSize: 16),
                       ),
-                    );
-                  }).toList(),
+                    ),
+                  );
+                },
+              )
+                  : const Center(
+                child: Text(
+                  'No mood logs saved yet.',
+                  style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
                 ),
               ),
             ),

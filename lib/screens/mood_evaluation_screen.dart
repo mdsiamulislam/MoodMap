@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:moodmap/const/color.dart';
+import 'package:moodmap/screens/MoodSelector.dart';
 import '../const/consValu.dart';
 import '../models/MoodBarChart.dart';
-import '../models/MoodEvaluationButton.dart';
 import 'package:url_launcher/url_launcher.dart';  // For opening URLs (YouTube links)
 
 class MoodEvaluationScreen extends StatefulWidget {
@@ -41,7 +42,7 @@ class _MoodEvaluationScreenState extends State<MoodEvaluationScreen> {
             }
           });
         },
-        indicatorColor: Colors.green,
+        indicatorColor: primaryBtn,
         selectedIndex: currentPageIndex,
         destinations: const <Widget>[
           NavigationDestination(
@@ -58,6 +59,11 @@ class _MoodEvaluationScreenState extends State<MoodEvaluationScreen> {
             icon: Icon(Icons.book_outlined),
             selectedIcon: Icon(Icons.book),
             label: 'Diary',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.emoji_events_outlined),
+            selectedIcon: Icon(Icons.emoji_events),
+            label: 'Award',
           ),
         ],
       ),
@@ -89,13 +95,13 @@ class _MoodEvaluationScreenState extends State<MoodEvaluationScreen> {
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                    color: primaryBtn,
                   ),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   "Here are some tips to improve your mood",
-                  style: TextStyle(fontSize: 13, color: Colors.green.shade700),
+                  style: TextStyle(fontSize: 13, color: primaryBtn),
                 ),
                 const SizedBox(height: 16),
                 Column(
@@ -192,15 +198,10 @@ class _MoodEvaluationScreenState extends State<MoodEvaluationScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green,
         onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return MoodEvaluationDialog();
-            },
-          );
+          Navigator.push(context, MaterialPageRoute(builder: (context) => MoodSelector()));
         },
+        backgroundColor: primaryBtn,
         child: Icon(Icons.emoji_emotions),
       ),
     );
