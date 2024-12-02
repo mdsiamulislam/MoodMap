@@ -29,8 +29,7 @@ class _MoodSugState extends State<MoodSug> {
     }
 
     if (_commonController.text.isNotEmpty) {
-      String commonData =
-          'Common Thoughts - ${_commonController.text} - $timestamp';
+      String commonData = 'Common Thoughts - ${_commonController.text} - $timestamp';
       savedList.add(commonData);
     }
 
@@ -40,7 +39,6 @@ class _MoodSugState extends State<MoodSug> {
       const SnackBar(content: Text('Mood saved successfully!')),
     );
 
-    // Clear all input fields after saving
     setState(() {
       _descriptionControllers.forEach((key, controller) {
         controller.clear();
@@ -168,8 +166,7 @@ class _MoodSugState extends State<MoodSug> {
               const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: () {
-                  if (_selectedMoods.isNotEmpty ||
-                      _commonController.text.isNotEmpty) {
+                  if (_selectedMoods.isNotEmpty || _commonController.text.isNotEmpty) {
                     _saveData();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(

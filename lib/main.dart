@@ -9,6 +9,10 @@ import 'package:moodmap/screens/statistics/statistics_home_page.dart';
 
 void main() {
   runApp(MaterialApp(
+    theme: ThemeData(
+      primaryColor: Colors.green,
+      fontFamily: 'nunito',
+    ),
     initialRoute: '/',
     routes: {
       '/': (context) => SplashScreen(),

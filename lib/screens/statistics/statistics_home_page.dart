@@ -10,7 +10,7 @@ class StatisticsHomePage extends StatefulWidget {
 
 class _StatisticsHomePageState extends State<StatisticsHomePage> {
   int currentPageIndex = 1;
-  List<String> groupedMoodLogs = [];
+  Map<String, List<String>> groupedMoodLogs = {};
 
   @override
   void initState() {
@@ -18,11 +18,29 @@ class _StatisticsHomePageState extends State<StatisticsHomePage> {
     _loadMoodLogs();
   }
 
-  // Load grouped mood logs saved by MoodSug class
   Future<void> _loadMoodLogs() async {
     final prefs = await SharedPreferences.getInstance();
+    List<String> moodLogs = prefs.getStringList('moodLogs') ?? [];
+    Map<String, List<String>> tempGroupedMoodLogs = {};
+
+    for (var log in moodLogs) {
+      List<String> logParts = log.split(' - ');
+      if (logParts.length < 3) continue; // Skip invalid logs
+      String dateTime = logParts.last.split(' ').sublist(0, 4).join(' ');
+      if (tempGroupedMoodLogs.containsKey(dateTime)) {
+        tempGroupedMoodLogs[dateTime]!.add(log);
+      } else {
+        tempGroupedMoodLogs[dateTime] = [log];
+      }
+    }
+
+    // Sort the logs so that the latest logs appear at the top
+    tempGroupedMoodLogs = Map.fromEntries(
+      tempGroupedMoodLogs.entries.toList()..sort((a, b) => b.key.compareTo(a.key)),
+    );
+
     setState(() {
-      groupedMoodLogs = prefs.getStringList('groupedMoodLogs') ?? [];
+      groupedMoodLogs = tempGroupedMoodLogs;
     });
   }
 
@@ -75,33 +93,68 @@ class _StatisticsHomePageState extends State<StatisticsHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Title
             const Text(
               'Mood Logs & Statistics',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
-
-            // Display grouped mood logs
             const Text(
               'Your Mood Check Logs:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-
             Expanded(
               child: groupedMoodLogs.isNotEmpty
                   ? ListView.builder(
-                itemCount: groupedMoodLogs.length,
+                itemCount: groupedMoodLogs.keys.length,
                 itemBuilder: (context, index) {
-                  final moodLog = groupedMoodLogs[index];
+                  String dateTime = groupedMoodLogs.keys.elementAt(index);
+                  List<String> logs = groupedMoodLogs[dateTime]!;
                   return Card(
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
-                      child: Text(
-                        moodLog,
-                        style: const TextStyle(fontSize: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            dateTime,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          ...logs.map((log) {
+                            List<String> logParts = log.split(' - ');
+                            String mood = logParts[0];
+                            String description = logParts[1];
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 4.0),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: mood,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: ' - $description',
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ],
                       ),
                     ),
                   );
