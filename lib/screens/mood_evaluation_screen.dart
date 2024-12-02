@@ -39,6 +39,10 @@ class _MoodEvaluationScreenState extends State<MoodEvaluationScreen> {
               case 2:
                 Navigator.pushNamed(context, '/diary');
                 break;
+              case 3:
+                Navigator.pushNamed(context, '/award');
+                break;
+
             }
           });
         },

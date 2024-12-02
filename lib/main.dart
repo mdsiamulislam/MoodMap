@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodmap/screens/award.dart';
 import 'package:moodmap/screens/diary/diary_home_page.dart';
 import 'package:moodmap/screens/login_screen.dart';
 import 'package:moodmap/screens/mood_evaluation_screen.dart';
@@ -15,6 +16,8 @@ void main() {
       '/moodCheck': (context) => MoodEvaluationScreen(),
       '/diary': (context) => DiaryHomePage(),
       '/statistics': (context) => StatisticsHomePage(),
+      '/award': (context) => Award(),
+
 
     },
     debugShowCheckedModeBanner: false,
