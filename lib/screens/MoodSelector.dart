@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moodmap/mood_sug.dart';
 
-
-
 class MoodSelector extends StatefulWidget {
   @override
   _MoodSelectorState createState() => _MoodSelectorState();
@@ -20,7 +18,7 @@ class _MoodSelectorState extends State<MoodSelector> {
     "Hopeful", "Inspired"
   ];
 
-  final List<String> purpleEmotions = ["Shocked", "Dismayed", "Perplexed", "Astonished", "Awe"];
+  final List<String> purpleEmotions = ["Fragile", "Grief", "Empty", "Embarrassed", "Ashamed"];
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +74,7 @@ class _MoodSelectorState extends State<MoodSelector> {
             ),
             SizedBox(height: 16),
             Text(
-              "Yellow Emotions",
+              "Happy Emotions",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.yellow[800]),
             ),
             Wrap(
@@ -86,8 +84,8 @@ class _MoodSelectorState extends State<MoodSelector> {
             ),
             SizedBox(height: 16),
             Text(
-              "Purple Emotions",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.purple[800]),
+              "Sad Emotions",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue[300]),
             ),
             Wrap(
               spacing: 8.0,

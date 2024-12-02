@@ -93,15 +93,6 @@ class _StatisticsHomePageState extends State<StatisticsHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Mood Logs & Statistics',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'Your Mood Check Logs:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
             const SizedBox(height: 10),
             Expanded(
               child: groupedMoodLogs.isNotEmpty

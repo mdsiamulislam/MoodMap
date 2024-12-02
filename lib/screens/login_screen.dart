@@ -6,13 +6,6 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.green[400]!, Colors.green[700]!],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
         child: Padding(
           padding: EdgeInsets.all(16),
           child: Column(
@@ -23,7 +16,6 @@ class LoginScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
                   fontFamily: 'Nunito',
                 ),
               ),
@@ -31,30 +23,26 @@ class LoginScreen extends StatelessWidget {
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Email',
-                  labelStyle: TextStyle(color: Colors.white),
                   filled: true,
-                  fillColor: Colors.white.withOpacity(0.1),
+                  fillColor: Colors.black.withOpacity(0.1),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide: BorderSide.none,
                   ),
                 ),
-                style: TextStyle(color: Colors.white),
               ),
               SizedBox(height: 20),
               TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  labelStyle: TextStyle(color: Colors.white),
                   filled: true,
-                  fillColor: Colors.white.withOpacity(0.1),
+                  fillColor: Colors.black.withOpacity(0.1),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide: BorderSide.none,
                   ),
                 ),
-                style: TextStyle(color: Colors.white),
               ),
               SizedBox(height: 20),
               ElevatedButton(
@@ -79,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                   "Continue as Guest",
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.white,
+                    color: Colors.blue,
                   ),
                 ),
               ),

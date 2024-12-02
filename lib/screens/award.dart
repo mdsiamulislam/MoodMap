@@ -28,13 +28,13 @@ class _AwardState extends State<Award> {
       pointsNeeded = 0;
     } else if (userPoints >= 50) {
       awardMessage = 'You have earned a Silver Award!';
-      awardImageUrl = 'https://static.vecteezy.com/system/resources/previews/041/856/368/non_2x/ai-generated-silver-trophy-isolated-on-white-background-free-png.png'; // Replace with actual image URL
-      nextAwardMessage = 'Next award: Gold Award';
+      awardImageUrl = 'https://static.thenounproject.com/png/7190408-512.png'; // Replace with actual image URL
+      nextAwardMessage = 'Next: Gold Award';
       pointsNeeded = 100 - userPoints;
     } else {
       awardMessage = 'You have earned a Bronze Award!';
       awardImageUrl = 'https://static.tiktokemoji.com/202410/20/v58Wd9yX.webp'; // Replace with actual image URL
-      nextAwardMessage = 'Next award: Silver Award';
+      nextAwardMessage = 'Next: Silver Award';
       pointsNeeded = 50 - userPoints;
     }
 
@@ -65,13 +65,13 @@ class _AwardState extends State<Award> {
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.green[800],
-                shadows: const [
-                  Shadow(
-                    blurRadius: 10.0,
-                    color: Colors.black45,
-                    offset: Offset(3.0, 3.0),
-                  ),
-                ],
+                // shadows: const [
+                //   Shadow(
+                //     blurRadius: 10.0,
+                //     color: Colors.black45,
+                //     offset: Offset(3.0, 3.0),
+                //   ),
+                // ],
               ),
             ),
             const SizedBox(height: 10),

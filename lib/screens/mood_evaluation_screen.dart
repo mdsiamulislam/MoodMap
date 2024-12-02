@@ -62,40 +62,40 @@ class _MoodEvaluationScreenState extends State<MoodEvaluationScreen> {
                   ),
                   SizedBox(height: 16),
 
-                  // Mood Evaluation Section
-                  Visibility(
-                    visible: !isMoodSubmitted,
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          isMoodSubmitted = true;
-                        });
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => MoodSelector()));
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                        decoration: BoxDecoration(
-                          color: Colors.green[500],
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Today's Mood Evaluation",
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const SizedBox(width: 24),
-                            Icon(Icons.alarm, color: Colors.white),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
+                  // // Mood Evaluation Section
+                  // Visibility(
+                  //   visible: !isMoodSubmitted,
+                  //   child: InkWell(
+                  //     onTap: () {
+                  //       setState(() {
+                  //         isMoodSubmitted = true;
+                  //       });
+                  //       Navigator.push(context, MaterialPageRoute(builder: (context) => MoodSelector()));
+                  //     },
+                  //     child: Container(
+                  //       padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  //       decoration: BoxDecoration(
+                  //         color: Colors.green[500],
+                  //         borderRadius: BorderRadius.circular(8),
+                  //       ),
+                  //       child: Row(
+                  //         children: [
+                  //           Text(
+                  //             "Today's Mood Evaluation",
+                  //             style: TextStyle(
+                  //               fontSize: 24,
+                  //               fontWeight: FontWeight.bold,
+                  //               color: Colors.white,
+                  //             ),
+                  //           ),
+                  //           const SizedBox(width: 24),
+                  //           Icon(Icons.alarm, color: Colors.white),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // const SizedBox(height: 8),
 
                   // Self-improvement Tips Section
                   Text(

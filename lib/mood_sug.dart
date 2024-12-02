@@ -80,7 +80,7 @@ class _MoodSugState extends State<MoodSug> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Select Your Mood",
+                "Reflect on your Emotions?",
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -120,7 +120,7 @@ class _MoodSugState extends State<MoodSug> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Describe your mood ($mood):",
+                      "Why Are You Feeling $mood?",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -145,7 +145,7 @@ class _MoodSugState extends State<MoodSug> {
               Divider(color: Colors.grey),
               const SizedBox(height: 16),
               Text(
-                "Additional Thoughts:",
+                "How did you feel today?",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -156,7 +156,7 @@ class _MoodSugState extends State<MoodSug> {
               TextField(
                 controller: _commonController,
                 decoration: InputDecoration(
-                  labelText: "Write your additional thoughts here...",
+                  labelText: "Freely write your thoughts...",
                   border: OutlineInputBorder(),
                   filled: true,
                   fillColor: Colors.green[50],
@@ -168,6 +168,7 @@ class _MoodSugState extends State<MoodSug> {
                 onPressed: () {
                   if (_selectedMoods.isNotEmpty || _commonController.text.isNotEmpty) {
                     _saveData();
+                    Navigator.popUntil(context, ModalRoute.withName('/moodCheck'));
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -178,14 +179,14 @@ class _MoodSugState extends State<MoodSug> {
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
-                  backgroundColor: Colors.green,
+                  backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                 ),
                 child: const Text(
                   'Save Mood',
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 16,color: Colors.purple),
                 ),
               ),
             ],

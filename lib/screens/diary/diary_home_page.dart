@@ -92,7 +92,8 @@ class _DiaryHomePageState extends State<DiaryHomePage> {
           children: [
             // Title for daily entry
             Text(
-              'Write your diary entry for today:',
+              'How did you feel today?',
+              //How did you feel today?
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 16),
@@ -101,7 +102,7 @@ class _DiaryHomePageState extends State<DiaryHomePage> {
               controller: _diaryController,
               maxLines: 6,
               decoration: InputDecoration(
-                hintText: 'What happened today?',
+                hintText: 'Freely write your thoughts...',
                 border: OutlineInputBorder(),
                 contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               ),
